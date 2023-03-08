@@ -32,3 +32,44 @@ showGraph(G)
 # https://networkx.org/documentation/stable/_downloads/networkx_reference.pdf
 
 
+from main.algorithms.dfs import DfsIterative
+
+class Fleury( object ):
+    #algorytm wyszukujący cykl Eulera w grafie
+    
+    def __init__(self, graph):
+        # inicjacja algorytmu grafem, 
+        # na ktorym zostanie wywolany algorytm szukania cyklu Eulera
+        self.graph = graph
+        
+    def run(self, source):
+        # metoda uruchamiajaca algorytm szukajacy cyklu Eulera. 
+        # Wynik algorytmu, czyli sciezka jaka nalezy przejsc aby uzyskac cykl Eulera
+        # zapisywany jest w zmiennej self.current_trail
+        node = source
+        self.current_trail = [node]
+        graph_copy = self.graph.copy()
+        while list(graph_copy.iteradjacent(node)):
+            for edge in list(graph_copy.iteroutedges(node)):
+                if not self._is_bridge(edge, graph_copy):
+                    break
+            graph_copy.del_edge(edge)
+            self.current_trail.append(edge.target)
+            node = edge.target
+            
+            
+    def _is_bridge(self, edge, graph):
+        # metoda sprawdza czy podana krawedz w 
+        # grafie przekazanym jako drugi argument jest mostem
+        # czyli krawedzia rozpoznajaca graf w przypadku jej usuniecia
+        dfs = DfsIterative(graph)
+        list1 =list()
+        list2 = list()
+        dfs.run(edge.source,
+                pre_action=lambda node: list1.append(node))
+        graph.del_edge(edge)
+        dfs.run(edge.source,
+                pre_action=lambda node: list2.append(node))
+        graph.add_edge(edge)
+        return len(list1) != len(list2)
+                
