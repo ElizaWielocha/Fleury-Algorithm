@@ -20,13 +20,7 @@ def showGraph(G):
     plt.show()
 
 
-#print("Number of:")
-#vNumber = int(input("Vertices = "))
-#G = createGraph(vNumber)
-#showGraph(G)
-
 # algorytm Fleuryego
-
 # https://th-www.if.uj.edu.pl/ztms/download/MScTheses/Lukasz_Malinowski_MSc.pdf
 # https://www.geeksforgeeks.org/fleurys-algorithm-for-printing-eulerian-path/
 # https://networkx.org/documentation/stable/_downloads/networkx_reference.pdf
