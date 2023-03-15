@@ -144,40 +144,32 @@ class Graph:
         
 # ----------------------------------------------------------------------------------------------
 
-''' 
-przyklad 1
-g1 = Graph(4)
-g_graphic = nx.empty_graph(4, create_using=None)
-g_graphic.add_edge(0, 1, color = 'black')
-g_graphic.add_edge(0, 2, color = 'black')
-g_graphic.add_edge(1, 2, color = 'black')
-g_graphic.add_edge(2, 3, color = 'black')
+# przyklad z wczytywaniem z pliku tekstowego
+with open('graf.txt') as f:
+    lines = f.readlines()
 
-for u,v in g_graphic.edges():
-    g1.addEdge(u,v)
-'''
+nVertices = int(lines[0])
+g1 = Graph(nVertices)
+g_graphic = nx.empty_graph(nVertices-1, create_using=None)
 
-
-# przyklad 2
-g2 = Graph(5)
-g_graphic = nx.empty_graph(4, create_using=None)
-g_graphic.add_edge(1, 0, color = 'black')
-g_graphic.add_edge(0, 2, color = 'black')
-g_graphic.add_edge(2, 1, color = 'black')
-g_graphic.add_edge(0, 3, color = 'black')
-g_graphic.add_edge(3, 4, color = 'black')
-g_graphic.add_edge(3, 2, color = 'black')
-g_graphic.add_edge(3, 1, color = 'black')
-g_graphic.add_edge(2, 4, color = 'black')
-
-for u,v in g_graphic.edges():
-    g2.addEdge(u,v)
-
+for i in range(1, len(lines)):
+    line = lines[i].split()
+    g1.addEdge(int(line[0]), int(line[1]))
+    g_graphic.add_edge(int(line[0]), int(line[1]), color = 'black')
 
 pos = nx.spring_layout(g_graphic)
 plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
 plt.show()
 # setting labels
 plt.title("Fleury working...")
+
+g1.printEulerTour(g_graphic, pos)
+
     
-g2.printEulerTour(g_graphic, pos)
+# ZADANIE: SPRAWDZAC CZY WPROWADZONY GRAF JEST EULEROWSKI
+'''
+Jeżeli wszystkie wierzchołki grafu nieskierowanego mają stopień parzysty, 
+a graf jest spójny, to znaczy, że da się skonstruować zamkniętą ścieżkę Eulera nazywaną cyklem Eulera. 
+Jeżeli najwyżej dwa wierzchołki mają nieparzysty stopień, to możliwe jest zbudowanie tylko takiej ścieżki Eulera, 
+która nie jest zamknięta.
+'''
