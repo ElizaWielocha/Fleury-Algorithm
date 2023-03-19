@@ -18,3 +18,6 @@ plt.plot()
 nx.draw(A, prog='dot')
 #nx.draw(g1, with_labels=True, arrows = True, connectionstyle='arc3, rad = 0.1')
 plt.show()
+
+
+
