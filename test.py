@@ -23,7 +23,7 @@ def graphic_consideredEdge(G, u, v, pos, colorr):
     G.add_edge(u, v, color=colorr)
     
     edges = G.edges()
-    colors = [G[u][v]['color'] for u,v in G.edges()]
+    colors = [c for (u,v,c) in g_graphic.edges(data='color')]
     
     nx.draw(G, pos=pos, edge_color = colors, node_size=800, with_labels=True)
     fig.canvas.draw()
@@ -66,9 +66,11 @@ class Graph:
         for index, key in enumerate(self.graph[u]):
             if key == v:
                 self.graph[u].pop(index)
+                break
         for index, key in enumerate(self.graph[v]):
             if key == u:
                 self.graph[v].pop(index)
+                break
  
     # A DFS based function to count reachable vertices from v
     def DFSCount(self, v, visited):
@@ -145,17 +147,23 @@ class Graph:
 # ----------------------------------------------------------------------------------------------
 
 # przyklad z wczytywaniem z pliku tekstowego
-with open('graf.txt') as f:
+with open('graf2.txt') as f:
     lines = f.readlines()
 
 nVertices = int(lines[0])
 g1 = Graph(nVertices)
-g_graphic = nx.empty_graph(nVertices-1, create_using=None)
+# multigraf, bo może miec krawedzie wielokrotne/petle
+g_graphic = nx.MultiGraph()
 
 for i in range(1, len(lines)):
     line = lines[i].split()
     g1.addEdge(int(line[0]), int(line[1]))
-    g_graphic.add_edge(int(line[0]), int(line[1]), color = 'black')
+    g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
+    
+    
+# wyswietl krawedze grafu:
+for (u,v,c) in g_graphic.edges(data='color'):
+    print(u,v)
 
 pos = nx.spring_layout(g_graphic)
 plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
@@ -167,6 +175,10 @@ g1.printEulerTour(g_graphic, pos)
 
     
 # ZADANIE: SPRAWDZAC CZY WPROWADZONY GRAF JEST EULEROWSKI
+# Graf przyjmuje krawedzie wielokrotne, ale petli jeszcze nie. Trzeba to dodać
+# Graficznie graf nie wyswietla multikrawedzi, ale jak usuwana jest jedna z 2 tych samych to zostaje ta druga
+# -co do petli nie wiem, nie sprawdzalam.
+
 '''
 Jeżeli wszystkie wierzchołki grafu nieskierowanego mają stopień parzysty, 
 a graf jest spójny, to znaczy, że da się skonstruować zamkniętą ścieżkę Eulera nazywaną cyklem Eulera. 
