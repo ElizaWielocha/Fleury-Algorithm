@@ -118,7 +118,7 @@ class Graph:
  
  
     # Print Euler tour starting from vertex u
-    def printEulerUtil(self, u, graphic_graph, pos):
+    def printEulerUtil(self, u, graphic_graph, pos ):
         #Recur for all the vertices adjacent to this vertex
         for v in self.graph[u]:
             #If edge u-v is not removed and it's a a valid next edge
@@ -134,7 +134,7 @@ class Graph:
    degree vertex (if there is any) and then calls printEulerUtil()
    to print the path '''
     def printEulerTour(self, graphic_graph, pos):
-        #Find a vertex with odd degree
+        #Find a start vertex -  with odd degree
         u = 0
         for i in range(self.V):
             if len(self.graph[i]) %2 != 0 :
@@ -147,37 +147,54 @@ class Graph:
 # ----------------------------------------------------------------------------------------------
 
 # przyklad z wczytywaniem z pliku tekstowego
-with open('graf2.txt') as f:
+with open('graf3.txt') as f:
     lines = f.readlines()
 
-nVertices = int(lines[0])
-g1 = Graph(nVertices)
-# multigraf, bo może miec krawedzie wielokrotne/petle
-g_graphic = nx.MultiGraph()
 
-for i in range(1, len(lines)):
+isDirected = True if lines[0].split()[0] == '->' else False
+nVertices = int(lines[1])
+g1 = Graph(nVertices)
+
+if isDirected:
+    g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+else:
+    g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+    
+
+
+for i in range(2, len(lines)):
     line = lines[i].split()
     g1.addEdge(int(line[0]), int(line[1]))
     g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
     
     
 # wyswietl krawedze grafu:
-for (u,v,c) in g_graphic.edges(data='color'):
-    print(u,v)
+#for (u,v,c) in g_graphic.edges(data='color'):
+    #print(u,v)
 
-pos = nx.spring_layout(g_graphic)
-plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
-plt.show()
-# setting labels
-plt.title("Fleury working...")
+isEulerian = nx.is_eulerian(g_graphic)
+isSemiEulerian = nx.is_semieulerian(g_graphic)
+#print(isEulerian, isSemiEulerian)
 
-g1.printEulerTour(g_graphic, pos)
 
-    
-# ZADANIE: SPRAWDZAC CZY WPROWADZONY GRAF JEST EULEROWSKI
-# Graf przyjmuje krawedzie wielokrotne, ale petli jeszcze nie. Trzeba to dodać
-# Graficznie graf nie wyswietla multikrawedzi, ale jak usuwana jest jedna z 2 tych samych to zostaje ta druga
-# -co do petli nie wiem, nie sprawdzalam.
+if isEulerian or isSemiEulerian:
+    pos = nx.spring_layout(g_graphic)
+    plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
+    plt.show()
+    # setting labels
+    plt.title("Fleury working...")
+
+    g1.printEulerTour(g_graphic, pos)
+
+# ZROBIONE :)
+# 1. Sprawdzanie czy wprowadzony graf jest semieulerowski/eulerowski.
+# 2. Algorytm przyjmuje krawedzie wielokrotne i petle.
+# 3. graficznie graf wyswietla petle.
+# 4. CGYBA Algorytm przyjmuje tez grafy skierowane w zaleznosci od tego czy pliki ich zawieraja '-' lub '->'
+
+
+# NIEZROBIONE :(
+# 1. Graficznie graf naklada na siebie multikrawedzie zamiast pokazywac je np obok siebie. 
 
 '''
 Jeżeli wszystkie wierzchołki grafu nieskierowanego mają stopień parzysty, 
