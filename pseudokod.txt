@@ -1,0 +1,77 @@
+DFS(u, visited)
+Input: vertex to perform DFS and visited list.
+Output: Count of reachable vertices from u
+
+begin
+	count := 1
+	visited[u] := True
+	for all vertex i, which are adjacents with u, do:
+		if i not visited, do:
+			count := count + dfs(i, visited)
+	return count 
+End
+
+
+-----------------------------------------------
+
+isValid(u,v)
+Input: The start and end node of edge
+Output: True when u-v is NOT a bridge
+
+Begin
+	if deg[u] == 1, do:
+		return True
+	else, do:
+		visited := [False] * number_of_V
+		count1 := dfs(u, visited)
+
+		remove_edge(u,v)
+
+		visited := [False] * number_of_V
+		count2 := dfs(u, visited)
+
+		add_edge(u,v)
+
+		if count1 > count2, do:
+			return False
+		else, do:
+			return True
+End
+
+
+------------------------------------------------
+findStartVertex(Graph)
+Input: Graph
+Output: Find the starting vertex to start algorithm.
+
+Begin
+	u := 0
+	for all vertex i in number_of_V, do:
+		if deg[i] % 2 == 0, do:
+			u := i
+			break
+
+	fleuryAlgorithm(u)
+End
+
+
+------------------------------------------------
+
+fleuryAlgorithm(u)
+Input: Start vertex u.
+Output: Display the Euler path or circuit.
+
+Begin
+	for all vertex v, which are adjacents with u, do:
+		if isValid(u,v), do:
+			print(u,v)
+			remove_edge(u,v)
+			fleuryAlgorithm(v)
+End
+
+
+
+
+
+
+
