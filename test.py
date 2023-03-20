@@ -147,7 +147,7 @@ class Graph:
 # ----------------------------------------------------------------------------------------------
 
 # przyklad z wczytywaniem z pliku tekstowego
-with open('graf3.txt') as f:
+with open('graf4.txt') as f:
     lines = f.readlines()
 
 
@@ -178,6 +178,7 @@ isSemiEulerian = nx.is_semieulerian(g_graphic)
 
 
 if isEulerian or isSemiEulerian:
+    print("Graph is " + ("semiEulerian." if isSemiEulerian else "Eulerian."))
     pos = nx.spring_layout(g_graphic)
     plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
     plt.show()
