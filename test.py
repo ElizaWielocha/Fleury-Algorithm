@@ -6,6 +6,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
+from tkinter import Tk     # from tkinter import Tk for Python 3.x
+from tkinter.filedialog import askopenfilename
+from tkinter import *
+window = Tk()    
+
 from collections import defaultdict
 
 # tworzenie plotna
@@ -150,6 +155,21 @@ class Graph:
         
 # ----------------------------------------------------------------------------------------------
 
+# MENU
+
+#window.title('Fleury Algorithm')              # title of the window
+#window.geometry("300x200+10+20")          # width * height + XPOS + YPOS
+#window.mainloop()  
+
+
+
+
+# ----------------------------------------------------------------------------------------------
+
+#Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+#filename = askopenfilename(filetypes=[("Text files", "*.txt")]) # show an "Open" dialog box and return the path to the selected file
+#print(filename)
+
 # przyklad z wczytywaniem z pliku tekstowego
 with open('graf4.txt') as f:
     lines = f.readlines()
@@ -178,7 +198,6 @@ for i in range(2, len(lines)):
 
 isEulerian = nx.is_eulerian(g_graphic)
 isSemiEulerian = nx.is_semieulerian(g_graphic)
-#print(isEulerian, isSemiEulerian)
 
 
 if isEulerian or isSemiEulerian:
@@ -194,8 +213,8 @@ if isEulerian or isSemiEulerian:
 # ZROBIONE :)
 # 1. Sprawdzanie czy wprowadzony graf jest semieulerowski/eulerowski.
 # 2. Algorytm przyjmuje krawedzie wielokrotne i petle.
-# 3. graficznie graf wyswietla petle.
-# 4. CGYBA Algorytm przyjmuje tez grafy skierowane w zaleznosci od tego czy pliki ich zawieraja '-' lub '->'
+# 3. Graficznie graf wyswietla petle.
+# 4. Chyba Algorytm przyjmuje tez grafy skierowane w zaleznosci od tego czy pliki ich zawieraja '-' lub '->'
 
 
 # NIEZROBIONE :(
