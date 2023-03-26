@@ -8,16 +8,76 @@ import time
 
 from tkinter import Tk     # from tkinter import Tk for Python 3.x
 from tkinter.filedialog import askopenfilename
-from tkinter import *
-window = Tk()    
+from tkinter import *   
 
 from collections import defaultdict
+
+# START MENU 
+window = Tk()   
+filename = "" 
+nVertices = 0
+edges_list = []
+
+
+lbl_line1 = Label(window, text = "_"*100, fg='white', font=("Helvetica", 18, "bold"), bg='black')
+lbl_line1.place(relx=0.5, rely=0.2, anchor=CENTER)
+
+lbl_line2 = Label(window, text = "_"*100, fg='white', font=("Helvetica", 18, "bold"), bg='black')
+lbl_line2.place(relx=0.5, rely=0.8, anchor=CENTER)
+
+# LABEL
+lbl_welcome = Label(window, text = "Welcome to algorithm Fleury program!", fg='yellow', font=("Helvetica", 23), bg='black')
+lbl_welcome.place(relx=0.5, rely=0.1, anchor=CENTER)
+
+lbl_menu = Label(window, text = "MENU", fg='green', font=("Helvetica", 20, "bold"), bg='black')
+lbl_menu.place(relx=0.5, rely=0.35, anchor=CENTER)
+
+
+lbl_cr_graph = Label(window, text = "Create your own graph", fg = 'white', font=("Helvetica", 18), bg='black')
+lbl_cr_graph.place(relx = 0.1, rely=0.55, anchor=W)
+
+lbl_load_graph = Label(window, text = "Load your graph from a text file", fg = 'white', font=("Helvetica", 18), bg='black')
+lbl_load_graph.place(relx = 0.1, rely=0.67, anchor=W)
+
+
+def load_graph_clicked():
+    global filename
+    filename = askopenfilename(filetypes=[("Text files", "*.txt")]) # show an "Open" dialog box and return the path to the selected file
+    window.destroy()
+
+# nieskonczone
+'''
+def create_graph_clicked():
+    global nVertices
+    global edges_list
+    nVertices = int(input("How many vertices?: "))
+    print("Provide edges according to the scheme and separate with enters: u v")
+    print("When you are done type end and Enter.\nGO!\n")
+    stop = input()
+    while stop != "end":
+        edges_list.append(tuple(list(map(int, stop.split()))))
+'''
+    
+
+
+btn_cr_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey')
+btn_cr_graph.place(relx = 0.75, rely=0.55, anchor=W)
+
+btn_load_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey', command=load_graph_clicked)
+btn_load_graph.place(relx = 0.75, rely=0.67, anchor=W)
+
+
+window.title('Fleury Algorithm')              # title of the window
+window.geometry("700x600+10+10")              # width * height + XPOS + YPOS
+window.configure(bg='black')
+window.mainloop()  
+
+# -------------------------------------------------------------------------------------------------
 
 # tworzenie plotna
 plt.ion()
 fig = plt.figure()
 plot = fig.add_subplot()
-
 
 
 # GRAFICZNIE FLEURY ---------------------------------------------------------------------------------
@@ -30,6 +90,7 @@ def graphic_consideredEdge(G, u, v, pos, colorr):
     edges = G.edges()
     colors = [c for (u,v,c) in g_graphic.edges(data='color')]
     
+    plt.clf() # nowe
     nx.draw(G, pos=pos, edge_color = colors, node_size=800, with_labels=True)
     fig.canvas.draw()
      
@@ -155,23 +216,9 @@ class Graph:
         
 # ----------------------------------------------------------------------------------------------
 
-# MENU
-
-#window.title('Fleury Algorithm')              # title of the window
-#window.geometry("300x200+10+20")          # width * height + XPOS + YPOS
-#window.mainloop()  
-
-
-
-
-# ----------------------------------------------------------------------------------------------
-
-#Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
-#filename = askopenfilename(filetypes=[("Text files", "*.txt")]) # show an "Open" dialog box and return the path to the selected file
-#print(filename)
 
 # przyklad z wczytywaniem z pliku tekstowego
-with open('graf4.txt') as f:
+with open(filename) as f:
     lines = f.readlines()
 
 
@@ -191,10 +238,7 @@ for i in range(2, len(lines)):
     g1.addEdge(int(line[0]), int(line[1]), isDirected)
     g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
 
-    
-# wyswietl krawedze grafu:
-#for (u,v,c) in g_graphic.edges(data='color'):
-    #print(u,v)
+
 
 isEulerian = nx.is_eulerian(g_graphic)
 isSemiEulerian = nx.is_semieulerian(g_graphic)
