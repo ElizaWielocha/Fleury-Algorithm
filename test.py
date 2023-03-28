@@ -17,6 +17,8 @@ window = Tk()
 filename = "" 
 nVertices = 0
 edges_list = []
+isDirected = False
+loadingGraph = False
 
 
 lbl_line1 = Label(window, text = "_"*100, fg='white', font=("Helvetica", 18, "bold"), bg='black')
@@ -39,28 +41,81 @@ lbl_cr_graph.place(relx = 0.1, rely=0.55, anchor=W)
 lbl_load_graph = Label(window, text = "Load your graph from a text file", fg = 'white', font=("Helvetica", 18), bg='black')
 lbl_load_graph.place(relx = 0.1, rely=0.67, anchor=W)
 
-
+# zaladuj graf
 def load_graph_clicked():
+    global loadingGraph
     global filename
+    loadingGraph = True
     filename = askopenfilename(filetypes=[("Text files", "*.txt")]) # show an "Open" dialog box and return the path to the selected file
     window.destroy()
 
-# nieskonczone
-'''
+# Stworz graf - nowe okno
 def create_graph_clicked():
-    global nVertices
-    global edges_list
-    nVertices = int(input("How many vertices?: "))
-    print("Provide edges according to the scheme and separate with enters: u v")
-    print("When you are done type end and Enter.\nGO!\n")
-    stop = input()
-    while stop != "end":
-        edges_list.append(tuple(list(map(int, stop.split()))))
-'''
+    window.destroy()
     
+    window1 = Tk()
+
+    # vertices
+    lbl_desc_v = Label(window1, text = "Type number of vertices in the graph: ", fg='yellow', font=("Helvetica", 16, "bold"), bg='black')
+    lbl_desc_v.place(relx=0.1, rely=0.1, anchor=W)
+
+    ntr_vertices = Entry(window1, width = 5, font=("Helvetica", 20))
+    ntr_vertices.place(relx=0.1, rely=0.17, anchor=W)
+
+    # is it directed?
+    lbl_desc_v = Label(window1, text = "Mark what kind of graph it should be: ", fg='yellow', font=("Helvetica", 16, "bold"), bg='black')
+    lbl_desc_v.place(relx=0.1, rely=0.3, anchor=W)
+
+    def check_if_directed():
+        global isDirected
+        if choice.get() == 1:
+            isDirected = True
+            print("Working")
+            
+    choice = IntVar()
+    choice.set(2)
+    directed = Radiobutton(window1, text="Directed", variable= choice, value= 1, fg='white', font=("Helvetica", 14), bg='black', selectcolor='black', command = check_if_directed )
+    directed.place(relx=0.1, rely=0.37, anchor=W)
+    not_directed = Radiobutton(window1, text="Undirected", variable= choice, value= 2, fg='white', font=("Helvetica", 14), bg='black', selectcolor='black', command = check_if_directed)
+    not_directed.place(relx=0.3, rely=0.37, anchor=W)
 
 
-btn_cr_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey')
+    # edges
+    lbl_desc = Label(window1, text = "Type edge vertices and confirm by clicking add button ", fg='yellow', font=("Helvetica", 16, "bold"), bg='black')
+    lbl_desc.place(relx=0.1, rely=0.5, anchor=W)
+        
+    lbl_scheme = Label(window1, text = "Scheme: v1 v2 ", fg='white', font=("Helvetica", 16), bg='black')
+    lbl_scheme.place(relx=0.1, rely=0.56, anchor=W)
+
+    ntr_edge = Entry(window1, width = 20, font=("Helvetica", 20))
+    ntr_edge.place(relx=0.1, rely=0.62, anchor=W)
+
+    def clicked_add_edge():
+        global edges_list
+        edges_list.append(tuple(list(map(int, ntr_edge.get().split() )))) # (1, 2) przedzielona spacja z prawej strony
+        ntr_edge.delete(0, END)
+        print(edges_list)
+        
+    btn_add = Button(window1, text = "  Add ", fg = 'green', font=("Helvetica", 13, "bold"), padx=3, pady=3, activebackground='grey', command=clicked_add_edge)
+    btn_add.place(relx = 0.58, rely=0.62, anchor=W)
+
+    # end
+    def get_vertices_number():
+        global nVertices
+        nVertices = int(ntr_vertices.get())
+        print(nVertices)
+        window1.destroy()
+
+    btn_end = Button(window1, text = "  DONE! ", fg = 'green', font=("Helvetica", 13, "bold"), padx=3, pady=3, activebackground='grey', command=get_vertices_number)
+    btn_end.place(relx = 0.8, rely=0.8, anchor=W)
+
+    window1.title('Fleury Algorithm')
+    window1.geometry("700x600+10+10")
+    window1.configure(bg='black')
+    window1.mainloop()
+
+
+btn_cr_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey', command=create_graph_clicked)
 btn_cr_graph.place(relx = 0.75, rely=0.55, anchor=W)
 
 btn_load_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey', command=load_graph_clicked)
@@ -81,7 +136,7 @@ plot = fig.add_subplot()
 
 
 # GRAFICZNIE FLEURY ---------------------------------------------------------------------------------
-# rozparywana krawedz grafu jest zielona
+# rozpatrywana krawedz grafu jest zielona
 def graphic_consideredEdge(G, u, v, pos, colorr):
     plt.clf()
     G.remove_edge(u,v)
@@ -177,7 +232,9 @@ class Graph:
  
             #2.c) Add the edge back to the graph
             self.addEdge(u,v, isDirected)
- 
+
+            print(count1)
+            print(count2)
             # 2.d) If count1 is greater, then edge (u, v) is a bridge
             if count1 > count2:
                 graphic_consideredEdge(graphic_graph, u, v, pos, 'red')
@@ -216,28 +273,35 @@ class Graph:
         
 # ----------------------------------------------------------------------------------------------
 
+if loadingGraph == True: # jesli graf jest wczytywany
+    # przyklad z wczytywaniem z pliku tekstowego
+    with open(filename) as f:
+        lines = f.readlines()
 
-# przyklad z wczytywaniem z pliku tekstowego
-with open(filename) as f:
-    lines = f.readlines()
+    isDirected = True if lines[0].split()[0] == '->' else False
+    nVertices = int(lines[1])
+    g1 = Graph(nVertices)
 
-
-isDirected = True if lines[0].split()[0] == '->' else False
-nVertices = int(lines[1])
-g1 = Graph(nVertices)
-
-if isDirected:
-    g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
-else:
-    g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+    if isDirected:
+        g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+    else:
+        g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+        
+    for i in range(2, len(lines)):
+        line = lines[i].split()
+        g1.addEdge(int(line[0]), int(line[1]), isDirected)
+        g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
+else: # jesli graf jest tworzony
+    g1 = Graph(nVertices)
     
+    if isDirected:
+        g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+    else:
+        g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
 
-
-for i in range(2, len(lines)):
-    line = lines[i].split()
-    g1.addEdge(int(line[0]), int(line[1]), isDirected)
-    g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
-
+    for i in range(len(edges_list)):
+        g1.addEdge(edges_list[i][0], edges_list[i][1], isDirected)
+        g_graphic.add_edge(edges_list[i][0], edges_list[i][1], color='black')
 
 
 isEulerian = nx.is_eulerian(g_graphic)
