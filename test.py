@@ -11,12 +11,12 @@ from tkinter.filedialog import askopenfilename
 from tkinter import *   
 
 from collections import defaultdict
+import keyboard
 
-import sys
-sys.setrecursionlimit(3000)
 
 # START MENU 
 window = Tk()   
+finalList = []
 filename = "" 
 nVertices = 0
 edges_list = []
@@ -44,6 +44,7 @@ lbl_cr_graph.place(relx = 0.1, rely=0.55, anchor=W)
 lbl_load_graph = Label(window, text = "Load your graph from a text file", fg = 'white', font=("Helvetica", 18), bg='black')
 lbl_load_graph.place(relx = 0.1, rely=0.67, anchor=W)
 
+
 # zaladuj graf
 def load_graph_clicked():
     global loadingGraph
@@ -51,6 +52,7 @@ def load_graph_clicked():
     loadingGraph = True
     filename = askopenfilename(filetypes=[("Text files", "*.txt")]) # show an "Open" dialog box and return the path to the selected file
     window.destroy()
+
 
 # Stworz graf - nowe okno
 def create_graph_clicked():
@@ -73,7 +75,6 @@ def create_graph_clicked():
         global isDirected
         if choice.get() == 1:
             isDirected = True
-            print("Working")
             
     choice = IntVar()
     choice.set(2)
@@ -97,7 +98,6 @@ def create_graph_clicked():
         global edges_list
         edges_list.append(tuple(list(map(int, ntr_edge.get().split() )))) # (1, 2) przedzielona spacja z prawej strony
         ntr_edge.delete(0, END)
-        print(edges_list)
         
     btn_add = Button(window1, text = "  Add ", fg = 'green', font=("Helvetica", 13, "bold"), padx=3, pady=3, activebackground='grey', command=clicked_add_edge)
     btn_add.place(relx = 0.58, rely=0.62, anchor=W)
@@ -106,7 +106,6 @@ def create_graph_clicked():
     def get_vertices_number():
         global nVertices
         nVertices = int(ntr_vertices.get())
-        print(nVertices)
         window1.destroy()
 
     btn_end = Button(window1, text = "  DONE! ", fg = 'green', font=("Helvetica", 13, "bold"), padx=3, pady=3, activebackground='grey', command=get_vertices_number)
@@ -116,6 +115,8 @@ def create_graph_clicked():
     window1.geometry("700x600+10+10")
     window1.configure(bg='black')
     window1.mainloop()
+
+
 
 
 btn_cr_graph = Button(window, text = "  Start  ", fg = 'black', font=("Helvetica", 13), padx=3, pady=3, activebackground='grey', command=create_graph_clicked)
@@ -155,9 +156,8 @@ def graphic_consideredEdge(G, u, v, pos, colorr):
         
         # to flush the GUI events
         fig.canvas.flush_events()
-        input()
-        #time.sleep(2)
-    
+        keyboard.wait('space')
+        
 # usuwanie z grafu (plot) krawedzi
 def graphic_removeEdge(G, u, v, pos):
     if G.has_edge(u,v):
@@ -170,8 +170,7 @@ def graphic_removeEdge(G, u, v, pos):
         
         # to flush the GUI events
         fig.canvas.flush_events()
-        input()
-        #time.sleep(3)
+        keyboard.wait('space')
 
 # -------------------------------------------------------------------------------------------------
     
@@ -259,7 +258,8 @@ class Graph:
         for v in self.graph[u]:
             #If edge u-v is not removed and it's a a valid next edge
             if self.isValidNextEdge(u, v, graphic_graph, pos, isDirected):
-                print("%d-%d " %(u,v)),
+                finalList.append("%d-%d" %(u,v))
+                #print("%d-%d " %(u,v))
                 graphic_removeEdge(graphic_graph, u, v, pos)
                 self.rmvEdge(u, v, isDirected)
                 self.printEulerUtil(v, graphic_graph, pos)
@@ -278,57 +278,85 @@ class Graph:
                     u = i
                     break
             # Print tour starting from odd vertex
-            print ("\n")
+            #print ("\n")
             self.printEulerUtil(u, graphic_graph, pos)
         else:
             self.printEulerUtil(u, graphic_graph, pos)
         
 # ----------------------------------------------------------------------------------------------
 
-if loadingGraph == True: # jesli graf jest wczytywany
-    # przyklad z wczytywaniem z pliku tekstowego
-    with open(filename) as f:
-        lines = f.readlines()
+if __name__ == "__main__":
+    if loadingGraph == True: # jesli graf jest wczytywany
+        # przyklad z wczytywaniem z pliku tekstowego
+        with open(filename) as f:
+            lines = f.readlines()
 
-    isDirected = True if lines[0].split()[0] == '->' else False
-    nVertices = int(lines[1])
-    g1 = Graph(nVertices)
+        isDirected = True if lines[0].split()[0] == '->' else False
+        nVertices = int(lines[1])
+        g1 = Graph(nVertices)
 
-    if isDirected:
-        g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
-    else:
-        g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+        if isDirected:
+            g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+        else:
+            g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+            
+        for i in range(2, len(lines)):
+            line = lines[i].split()
+            g1.addEdge(int(line[0]), int(line[1]), isDirected)
+            g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
+    else: # jesli graf jest tworzony
+        g1 = Graph(nVertices)
         
-    for i in range(2, len(lines)):
-        line = lines[i].split()
-        g1.addEdge(int(line[0]), int(line[1]), isDirected)
-        g_graphic.add_edge(int(line[0]), int(line[1]), color='black')
-else: # jesli graf jest tworzony
-    g1 = Graph(nVertices)
-    
-    if isDirected:
-        g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+        if isDirected:
+            g_graphic = nx.MultiDiGraph() # dimultigraf, bo może miec krawedzie wielokrotne/petle
+        else:
+            g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
+
+        for i in range(len(edges_list)):
+            g1.addEdge(edges_list[i][0], edges_list[i][1], isDirected)
+            g_graphic.add_edge(edges_list[i][0], edges_list[i][1], color='black')
+
+
+    isEulerian = nx.is_eulerian(g_graphic)
+    isSemiEulerian = nx.is_semieulerian(g_graphic)
+
+
+    if isEulerian or isSemiEulerian:
+        pos = nx.spring_layout(g_graphic)
+        plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
+        plt.show()
+        # setting labels
+        plt.title("Fleury working...")
+
+        g1.printEulerTour(g_graphic, pos, isEulerian)
+        
+        end_window = Tk()
+        
+        lbl_end = Label(end_window, text = "Result", fg='yellow', font=("Helvetica", 22, "bold"), bg='black')
+        lbl_end.place(relx=0.5, rely=0.32, anchor=CENTER)
+        
+        txt = Text(end_window, width=50, height=5, font=("Helvetica", 18))
+        txt.place(relx=0.5, rely=0.5, anchor=CENTER)
+        for edge in finalList:
+            txt.insert(END, edge + "   ")
+        
+        end_window.title('Fleury Algorithm')              # title of the window
+        end_window.geometry("700x600+10+10")              # width * height + XPOS + YPOS
+        end_window.configure(bg='black')
+        end_window.mainloop()  
+        
     else:
-        g_graphic = nx.MultiGraph() # multigraf, bo może miec krawedzie wielokrotne/petle
-
-    for i in range(len(edges_list)):
-        g1.addEdge(edges_list[i][0], edges_list[i][1], isDirected)
-        g_graphic.add_edge(edges_list[i][0], edges_list[i][1], color='black')
-
-
-isEulerian = nx.is_eulerian(g_graphic)
-isSemiEulerian = nx.is_semieulerian(g_graphic)
-
-
-if isEulerian or isSemiEulerian:
-    print("Graph is " + ("semiEulerian." if isSemiEulerian else "Eulerian."))
-    pos = nx.spring_layout(g_graphic)
-    plot = nx.draw(g_graphic, pos=pos, node_size=800, with_labels=True)
-    plt.show()
-    # setting labels
-    plt.title("Fleury working...")
-
-    g1.printEulerTour(g_graphic, pos, isEulerian)
+        plt.close(fig)
+        
+        euler_window = Tk()
+        lbl_euler = Label(euler_window, text="Graph is not eulerian or semieulerian", fg='yellow', font=("Helvetica", 22, "bold"), bg='black')
+        lbl_euler.place(relx=0.5, rely=0.5, anchor=CENTER)
+        
+        euler_window.title('Fleury Algorithm')              # title of the window
+        euler_window.geometry("700x200+10+10")              # width * height + XPOS + YPOS
+        euler_window.configure(bg='black')
+        euler_window.mainloop() 
+        
 
 # ZROBIONE :)
 # 1. Sprawdzanie czy wprowadzony graf jest semieulerowski/eulerowski.
