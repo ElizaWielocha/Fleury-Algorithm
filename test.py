@@ -12,6 +12,9 @@ from tkinter import *
 
 from collections import defaultdict
 
+import sys
+sys.setrecursionlimit(3000)
+
 # START MENU 
 window = Tk()   
 filename = "" 
@@ -138,35 +141,37 @@ plot = fig.add_subplot()
 # GRAFICZNIE FLEURY ---------------------------------------------------------------------------------
 # rozpatrywana krawedz grafu jest zielona
 def graphic_consideredEdge(G, u, v, pos, colorr):
-    plt.clf()
-    G.remove_edge(u,v)
-    G.add_edge(u, v, color=colorr)
-    
-    edges = G.edges()
-    colors = [c for (u,v,c) in g_graphic.edges(data='color')]
-    
-    plt.clf() # nowe
-    nx.draw(G, pos=pos, edge_color = colors, node_size=800, with_labels=True)
-    fig.canvas.draw()
-     
-    # to flush the GUI events
-    fig.canvas.flush_events()
-    input()
-    #time.sleep(2)
+    if G.has_edge(u,v):
+        plt.clf()
+        G.remove_edge(u,v)
+        G.add_edge(u, v, color=colorr)
+        
+        edges = G.edges()
+        colors = [c for (u,v,c) in g_graphic.edges(data='color')]
+        
+        plt.clf() # nowe
+        nx.draw(G, pos=pos, edge_color = colors, node_size=800, with_labels=True)
+        fig.canvas.draw()
+        
+        # to flush the GUI events
+        fig.canvas.flush_events()
+        input()
+        #time.sleep(2)
     
 # usuwanie z grafu (plot) krawedzi
 def graphic_removeEdge(G, u, v, pos):
-    G.remove_edge(u,v)
- 
-    # re-drawing the figure
-    plt.clf()
-    nx.draw(G, pos=pos, node_size=800, with_labels=True)
-    fig.canvas.draw()
-     
-    # to flush the GUI events
-    fig.canvas.flush_events()
-    input()
-    #time.sleep(3)
+    if G.has_edge(u,v):
+        G.remove_edge(u,v)
+    
+        # re-drawing the figure
+        plt.clf()
+        nx.draw(G, pos=pos, node_size=800, with_labels=True)
+        fig.canvas.draw()
+        
+        # to flush the GUI events
+        fig.canvas.flush_events()
+        input()
+        #time.sleep(3)
 
 # -------------------------------------------------------------------------------------------------
     
@@ -205,6 +210,8 @@ class Graph:
             if visited[i] == False:
                 count = count + self.DFSCount(i, visited)        
         return count
+        
+
  
     # The function to check if edge u-v can be considered as next edge in
     # Euler Tour
@@ -222,19 +229,21 @@ class Graph:
   
             2.a) count of vertices reachable from u'''   
             visited =[False]*(self.V)
-            count1 = self.DFSCount(u, visited)
+            count1 = self.DFSCount(u, visited) 
  
             '''2.b) Remove edge (u, v) and after removing the edge, count
                 vertices reachable from u'''
             self.rmvEdge(u, v, isDirected)
+            
             visited =[False]*(self.V)
-            count2 = self.DFSCount(u, visited)
- 
+            if isDirected:
+                count2 = self.DFSCount(v, visited)
+            else:
+                count2 = self.DFSCount(u, visited)
+        
             #2.c) Add the edge back to the graph
             self.addEdge(u,v, isDirected)
 
-            print(count1)
-            print(count2)
             # 2.d) If count1 is greater, then edge (u, v) is a bridge
             if count1 > count2:
                 graphic_consideredEdge(graphic_graph, u, v, pos, 'red')
@@ -260,16 +269,19 @@ class Graph:
     '''The main function that print Eulerian Trail. It first finds an odd
    degree vertex (if there is any) and then calls printEulerUtil()
    to print the path '''
-    def printEulerTour(self, graphic_graph, pos):
-        #Find a start vertex -  with odd degree
+    def printEulerTour(self, graphic_graph, pos, isEulerian):
+        #Find a start vertex -  with odd degree if isnt eulerian
         u = 0
-        for i in range(self.V):
-            if len(self.graph[i]) %2 != 0 :
-                u = i
-                break
-        # Print tour starting from odd vertex
-        print ("\n")
-        self.printEulerUtil(u, graphic_graph, pos)
+        if not isEulerian:
+            for i in range(self.V):
+                if len(self.graph[i]) %2 != 0 :
+                    u = i
+                    break
+            # Print tour starting from odd vertex
+            print ("\n")
+            self.printEulerUtil(u, graphic_graph, pos)
+        else:
+            self.printEulerUtil(u, graphic_graph, pos)
         
 # ----------------------------------------------------------------------------------------------
 
@@ -316,7 +328,7 @@ if isEulerian or isSemiEulerian:
     # setting labels
     plt.title("Fleury working...")
 
-    g1.printEulerTour(g_graphic, pos)
+    g1.printEulerTour(g_graphic, pos, isEulerian)
 
 # ZROBIONE :)
 # 1. Sprawdzanie czy wprowadzony graf jest semieulerowski/eulerowski.
