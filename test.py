@@ -75,6 +75,8 @@ def create_graph_clicked():
         global isDirected
         if choice.get() == 1:
             isDirected = True
+        if choice.get() == 2:
+            isDirected = False
             
     choice = IntVar()
     choice.set(2)
