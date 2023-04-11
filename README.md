@@ -31,4 +31,17 @@ Important! The vertices in the graph start from 0.
 When you finish typing in the edges you can click "DONE!".
 
 
-2. 
+2. Load your graph from the text file:
+When you get to this option, you must:
+    - select a .txt file representing the graph. Below is an example of what such a file must look like:
+![image](https://user-images.githubusercontent.com/61736185/231254379-e16a5859-bad7-43a7-972f-aca72d7b0d9b.png)
+First line: 
+arrow (->) means directed graph 
+dash (-) indicates undirected graph
+
+Second line:
+number of vertices in the graph (the graph starts with vertex number 0)
+
+Other lines:
+Edges inscribed with the scheme: v1[space]v2
+
