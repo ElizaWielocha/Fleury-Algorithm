@@ -40,22 +40,22 @@ When you get to this option, you must:
     - select a .txt file representing the graph. Below is an example of what such a file must look like:  
 ![image](https://user-images.githubusercontent.com/61736185/231255462-b4bf2999-1fda-41ef-8236-f5ccff33a8ea.png)  
 
-    First line:   
-    arrow (->) means directed graph   
-    dash (-) indicates undirected graph  
+        First line:   
+        arrow (->) means directed graph   
+        dash (-) indicates undirected graph  
 
-    Second line:  
-    number of vertices in the graph (the graph starts with vertex number 0)  
+        Second line:  
+        number of vertices in the graph (the graph starts with vertex number 0)  
 
-    Other lines:  
-    Edges inscribed with the scheme: v1[space]v2  
+        Other lines:  
+        Edges inscribed with the scheme: v1[space]v2  
 
 
 ALGORITHM OPERATION  
 You need to load into the program a graph that:  
-    - is consistent  
-    - undirected: either all its vertices have even degree or only 2 vertices have odd degree  
-    - directed: the vertices must have the same number of incoming and outgoing edges  
+        - is consistent  
+        - undirected: either all its vertices have even degree or only 2 vertices have odd degree  
+        - directed: the vertices must have the same number of incoming and outgoing edges  
 If the graph does not meet the above criteria, the program displays a message and should be closed:  
 ![image](https://user-images.githubusercontent.com/61736185/231257278-73c8656c-173d-4914-b16b-d773d1973782.png)
 
