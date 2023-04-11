@@ -70,6 +70,7 @@ An edge highlighted in red means that this edge is a bridge and it is not yet po
 
 
 RESULTS
+
 When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.
 
 ![image](https://user-images.githubusercontent.com/61736185/231259101-d1ce88dd-f3c8-4d0e-b352-9ff5d7b9e95d.png)
