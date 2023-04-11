@@ -1,5 +1,11 @@
 Graphic program to perform Fleury Algorithm on undirected and directed graphs.
 
+Fleury Algorithm -> Finds an Euler path/cycle in a graph.
+
+It involves removing edges from the graph that are not bridges and adding them to the list until all edges in the graph are removed. 
+
+A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. 
+
 Programming language: Python
 
 Libraries used:
@@ -14,7 +20,9 @@ Libraries used:
 RUNNING THE PROGRAM
 The program is launched using the fleury.py file.
 In the folder with the fleury.py file, type the command in the terminal:
+
 | python fleury.py |
+
 Or you can run the file through Visual Studio Code.
 For the program to work you must have installed the libraries used to create it.
 
