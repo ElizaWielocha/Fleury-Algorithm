@@ -65,4 +65,13 @@ The next steps of the action are shown by pressing the [space] key.
 A green highlighted edge means that the edge under consideration is not a bridge and therefore can be walked over. 
 It is removed from the graph and added to the list, which will be displayed after the algorithm finishes as the result.
 
-An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge. 
+An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge:
+![image](https://user-images.githubusercontent.com/61736185/231258976-80c66643-469f-40b5-bf18-c17982904b6b.png)
+
+
+RESULTS
+When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.
+
+![image](https://user-images.githubusercontent.com/61736185/231259101-d1ce88dd-f3c8-4d0e-b352-9ff5d7b9e95d.png)
+
+
