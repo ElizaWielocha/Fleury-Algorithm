@@ -4,7 +4,7 @@ import networkx as nx
 from math import pi
 import matplotlib.pyplot as plt
 import numpy as np
-import time
+#import time
 
 from tkinter import Tk     # from tkinter import Tk for Python 3.x
 from tkinter.filedialog import askopenfilename
