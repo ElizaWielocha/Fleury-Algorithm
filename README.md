@@ -35,6 +35,7 @@ When you finish typing in the edges you can click "DONE!".
 When you get to this option, you must:
     - select a .txt file representing the graph. Below is an example of what such a file must look like:
 ![image](https://user-images.githubusercontent.com/61736185/231255462-b4bf2999-1fda-41ef-8236-f5ccff33a8ea.png)
+
 First line: 
 arrow (->) means directed graph 
 dash (-) indicates undirected graph
@@ -47,6 +48,7 @@ Edges inscribed with the scheme: v1[space]v2
 
 
 ALGORITHM OPERATION
+
 You need to load into the program a graph that:
 - is consistent
 - undirected: either all its vertices have even degree or only 2 vertices have odd degree
