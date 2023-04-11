@@ -51,6 +51,7 @@ When you get to this option, you must:
         Edges inscribed with the scheme: v1[space]v2  
 
 
+
 ALGORITHM OPERATION  
 You need to load into the program a graph that:  
         - is consistent  
