@@ -40,15 +40,15 @@ When you get to this option, you must:
     - select a .txt file representing the graph. Below is an example of what such a file must look like:  
 ![image](https://user-images.githubusercontent.com/61736185/231255462-b4bf2999-1fda-41ef-8236-f5ccff33a8ea.png)  
 
-First line:   
-arrow (->) means directed graph   
-dash (-) indicates undirected graph  
+    First line:   
+    arrow (->) means directed graph   
+    dash (-) indicates undirected graph  
 
-Second line:  
-number of vertices in the graph (the graph starts with vertex number 0)  
+    Second line:  
+    number of vertices in the graph (the graph starts with vertex number 0)  
 
-Other lines:  
-Edges inscribed with the scheme: v1[space]v2  
+    Other lines:  
+    Edges inscribed with the scheme: v1[space]v2  
 
 
 ALGORITHM OPERATION  
