@@ -18,10 +18,10 @@ Or you can run the file through Visual Studio Code.
 For the program to work you must have installed the libraries used to create it.
 
 START MENU
-image.png
+![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)
 The initial menu has 2 options:
 1. Create your own graph:
-image.png
+![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)
 When you get to this option, you must:
     - enter how many vertices your graph has
     - select whether the graph is directed or undirected
