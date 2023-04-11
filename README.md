@@ -1,6 +1,7 @@
 Graphic program to perform Fleury Algorithm on undirected and directed graphs.
 
 Programming language: Python
+
 Libraries used:
     - matplotlib
     - networkx
