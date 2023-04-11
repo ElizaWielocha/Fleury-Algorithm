@@ -60,7 +60,9 @@ If the graph does not meet the above criteria, the program displays a message an
 If you create/load a good graph, the program displays the graph and runs the fleury algorithm.
 ![image](https://user-images.githubusercontent.com/61736185/231258452-3f8e5777-b68d-4207-934d-0117727e5970.png)
 
-The next steps of the action are shown by pressing the [space] key. 
+The next steps of the action are shown by pressing the [space] key.
+
 A green highlighted edge means that the edge under consideration is not a bridge and therefore can be walked over. 
 It is removed from the graph and added to the list, which will be displayed after the algorithm finishes as the result.
-An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge.  
+
+An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge. 
