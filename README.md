@@ -7,8 +7,8 @@ A bridge is an edge through which you cannot go to the next vertex because, ther
 
 <h4>Programming language: Python</h4>  
 <h4>Libraries used:</h4>  
-    <p>- matplotlib  
-    - networkx  
+    <p>\t- matplotlib  
+    \t- networkx  
     - math  
     - numpy  
     - tkinter  
