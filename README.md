@@ -28,11 +28,11 @@ For the program to work you must have installed the libraries used to create it.
 
 <h2>START MENU</h2> <br>  
 
-![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
+![image](https://user-images.githubusercontent.com/61736185/234978717-d8e5b8cc-259a-4377-beca-346b4cfa15ac.png)
 
 <h3>1. Create your own graph:  </h3>  
 
-![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)  
+![image](https://user-images.githubusercontent.com/61736185/234978797-1f1313d0-d291-4cf0-941d-1af2497b6955.png)
 
 <p>
 When you get to this option, you must:  
@@ -94,13 +94,13 @@ You need to load into the program a graph that:
 If the graph does not meet the above criteria, the program displays a message and should be closed:  
 </p>  
 
-![image](https://user-images.githubusercontent.com/61736185/231257278-73c8656c-173d-4914-b16b-d773d1973782.png)
+![image](https://user-images.githubusercontent.com/61736185/234979094-9f049af9-52f5-4dbe-93a2-b86aeb8c7119.png)
 
 <p>
 If you create/load a good graph, the program displays the graph and runs the fleury algorithm. 
 </p>  
 
-![image](https://user-images.githubusercontent.com/61736185/231258452-3f8e5777-b68d-4207-934d-0117727e5970.png)
+![image](https://user-images.githubusercontent.com/61736185/234978968-c42827a3-9c8c-4c1a-b8c1-9cf47d2e7a30.png)
 
 <p>
 The next steps of the action are shown by pressing the [space] key.  
@@ -111,7 +111,7 @@ It is removed from the graph and added to the list, which will be displayed afte
 An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge:  
 </p>  
 
-![image](https://user-images.githubusercontent.com/61736185/231258976-80c66643-469f-40b5-bf18-c17982904b6b.png)
+![image](https://user-images.githubusercontent.com/61736185/234979249-72daca4b-8352-4885-b834-3503eacd7e90.png)
 
 _____________________________________________________________________________________________________________
 
@@ -120,6 +120,6 @@ ________________________________________________________________________________
 When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.
 </p>  
 
-![image](https://user-images.githubusercontent.com/61736185/231259101-d1ce88dd-f3c8-4d0e-b352-9ff5d7b9e95d.png)
+![image](https://user-images.githubusercontent.com/61736185/234979344-e47b7638-8c95-403b-ade6-68a4f62d8ed2.png)
 
 
