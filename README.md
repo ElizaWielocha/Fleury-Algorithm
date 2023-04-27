@@ -36,7 +36,7 @@ For the program to work you must have installed the libraries used to create it.
 
 <p>
 When you get to this option, you must:  
-    - enter how many vertices your graph has  
+    - enter how many vertices your graph has  (graph begins with vertice 0)
     - select whether the graph is directed or undirected  
     - add edges for this graph, e.g. 1 3   
     After each edge you enter, click the "Add" button to add it.  
