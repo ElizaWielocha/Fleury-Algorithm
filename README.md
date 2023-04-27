@@ -5,8 +5,8 @@
 It involves removing edges from the graph that are not bridges and adding them to the list until all edges in the graph are removed.  
 A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. </p>
 
-Programming language: Python  
-Libraries used:  
+<h4>Programming language: Python</h4>  
+<h4>Libraries used:</h4>  
     - matplotlib  
     - networkx  
     - math  
