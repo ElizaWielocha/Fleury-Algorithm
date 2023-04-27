@@ -32,7 +32,7 @@ For the program to work you must have installed the libraries used to create it.
 
 <h3>1. Create your own graph:  </h3>  
 
-![image](https://user-images.githubusercontent.com/61736185/234978797-1f1313d0-d291-4cf0-941d-1af2497b6955.png)
+![image](https://user-images.githubusercontent.com/61736185/234984040-7e149e65-96e4-4693-b906-e0267c8c63d8.png)
 
 <p>
 When you get to this option, you must:  
