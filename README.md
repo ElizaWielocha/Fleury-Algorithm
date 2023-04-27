@@ -51,24 +51,25 @@ When you get to this option, you must select a .txt file representing the graph.
 Below is an example of what such a file must look like:  
 </p>  
 
-            ->
-            8
-            0 1
-            0 4
-            1 2
-            1 0
-            2 3
-            2 5
-            3 4
-            3 6
-            4 5
-            4 7
-            5 6
-            5 1
-            6 7
-            6 2
-            7 0
-            7 3
+    -><br>
+    8
+    0 1
+    0 4
+    1 2
+    1 0
+    2 3
+    2 5
+    3 4
+    3 6
+    4 5
+    4 7
+    5 6
+    5 1
+    6 7
+    6 2
+    7 0
+    7 3
+
 
 <p>
 First line:   
