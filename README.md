@@ -19,10 +19,10 @@ ________________________________________________________________________________
 
 <h2>RUNNING THE PROGRAM</h2>
 <p>
-The program is launched using the fleury.py file.  
-In the folder with the fleury.py file, type the command in the terminal:  
-| python fleury.py |  
-Or you can run the file through Visual Studio Code.  
+The program is launched using the fleury.py file.  <br>
+In the folder with the fleury.py file, type the command in the terminal:  <br>
+| python fleury.py |  <br>
+Or you can run the file through Visual Studio Code.  <br>
 For the program to work you must have installed the libraries used to create it.
 </p>
 
