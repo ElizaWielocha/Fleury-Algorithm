@@ -32,7 +32,8 @@ For the program to work you must have installed the libraries used to create it.
 <p>
 The initial menu has 2 options:  
 </p>
-<h3>1. Create your own graph:  </h3> <br>  
+<h3>1. Create your own graph:  </h3>  
+
 ![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)  
 
 <p>
