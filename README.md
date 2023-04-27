@@ -1,80 +1,125 @@
-Graphic program to perform Fleury Algorithm on undirected and directed graphs.
+<h1>Graphic program to perform Fleury Algorithm on undirected and directed graphs.</h1>
 
-Fleury Algorithm -> Finds an Euler path/cycle in a graph.  
+<h4>Fleury Algorithm</h4> 
+<p>-> Finds an Euler path/cycle in a graph.<br>  
 It involves removing edges from the graph that are not bridges and adding them to the list until all edges in the graph are removed.  
-A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. 
+A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. </p>
 
-Programming language: Python  
-Libraries used:  
-    - matplotlib  
-    - networkx  
-    - math  
-    - numpy  
-    - tkinter  
-    - collections  
-    - keyboard  
+<h4>Programming language: Python</h4>  
+<h4>Libraries used:</h4>  
+    <p>- matplotlib<br>  
+    - networkx  <br> 
+    - math  <br> 
+    - numpy  <br> 
+    - tkinter  <br> 
+    - collections  <br> 
+    - keyboard </p>
 
-RUNNING THE PROGRAM  
+_____________________________________________________________________________________________________________
+
+<h2>RUNNING THE PROGRAM</h2>
+<p>
 The program is launched using the fleury.py file.  
 In the folder with the fleury.py file, type the command in the terminal:  
 | python fleury.py |  
 Or you can run the file through Visual Studio Code.  
 For the program to work you must have installed the libraries used to create it.
+</p>
 
-START MENU  
-![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
-The initial menu has 2 options:  
-1. Create your own graph:  
-![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)  
+<h2>START MENU</h2> <br>  
+
+![image](https://user-images.githubusercontent.com/61736185/234978717-d8e5b8cc-259a-4377-beca-346b4cfa15ac.png)
+
+<h3>1. Create your own graph:  </h3>  
+
+![image](https://user-images.githubusercontent.com/61736185/234984172-209e8f30-5514-4eea-9401-27171b678122.png)
+
+<p>
 When you get to this option, you must:  
-    - enter how many vertices your graph has  
+    - enter how many vertices your graph has  (graph begins with vertice 0)
     - select whether the graph is directed or undirected  
     - add edges for this graph, e.g. 1 3   
     After each edge you enter, click the "Add" button to add it.  
 Important! The vertices in the graph start from 0.  
 When you finish typing in the edges you can click "DONE!".  
+</p>
 
 
-2. Load your graph from the text file:  
-When you get to this option, you must:  
-    - select a .txt file representing the graph. Below is an example of what such a file must look like:  
-![image](https://user-images.githubusercontent.com/61736185/231255462-b4bf2999-1fda-41ef-8236-f5ccff33a8ea.png)  
+<h3>2. Load your graph from the text file:</h3>  
+<p>
+When you get to this option, you must select a .txt file representing the graph. 
+Below is an example of what such a file must look like:  
+</p>  
 
-        First line:   
-        arrow (->) means directed graph   
-        dash (-) indicates undirected graph  
+    ->
+    8
+    0 1
+    0 4
+    1 2
+    1 0
+    2 3
+    2 5
+    3 4
+    3 6
+    4 5
+    4 7
+    5 6
+    5 1
+    6 7
+    6 2
+    7 0
+    7 3
 
-        Second line:  
-        number of vertices in the graph (the graph starts with vertex number 0)  
 
-        Other lines:  
-        Edges inscribed with the scheme: v1[space]v2  
+<p>
+First line:   
+arrow (->) means directed graph   
+dash (-) indicates undirected graph  
 
+Second line:  
+number of vertices in the graph (the graph starts with vertex number 0)  
 
+Other lines:  
+Edges inscribed with the scheme: v1[space]v2  
+</p>
 
-ALGORITHM OPERATION  
+_____________________________________________________________________________________________________________
+
+<h2>ALGORITHM OPERATION </h2>
+<p>
 You need to load into the program a graph that:  
         - is consistent  
         - undirected: either all its vertices have even degree or only 2 vertices have odd degree  
         - directed: the vertices must have the same number of incoming and outgoing edges  
 If the graph does not meet the above criteria, the program displays a message and should be closed:  
-![image](https://user-images.githubusercontent.com/61736185/231257278-73c8656c-173d-4914-b16b-d773d1973782.png)
+</p>  
 
+![image](https://user-images.githubusercontent.com/61736185/234979094-9f049af9-52f5-4dbe-93a2-b86aeb8c7119.png)
 
-If you create/load a good graph, the program displays the graph and runs the fleury algorithm.  
-![image](https://user-images.githubusercontent.com/61736185/231258452-3f8e5777-b68d-4207-934d-0117727e5970.png)
+<p>
+If you create/load a good graph, the program displays the graph and runs the fleury algorithm. 
+</p>  
 
+![image](https://user-images.githubusercontent.com/61736185/234978968-c42827a3-9c8c-4c1a-b8c1-9cf47d2e7a30.png)
+
+<p>
 The next steps of the action are shown by pressing the [space] key.  
-
+</p><p>
 A green highlighted edge means that the edge under consideration is not a bridge and therefore can be walked over.   
 It is removed from the graph and added to the list, which will be displayed after the algorithm finishes as the result.  
-
+</p><p>
 An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge:  
-![image](https://user-images.githubusercontent.com/61736185/231258976-80c66643-469f-40b5-bf18-c17982904b6b.png)
+</p>  
 
+![image](https://user-images.githubusercontent.com/61736185/234979249-72daca4b-8352-4885-b834-3503eacd7e90.png)
 
-RESULTS  
-When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.  
-![image](https://user-images.githubusercontent.com/61736185/231259101-d1ce88dd-f3c8-4d0e-b352-9ff5d7b9e95d.png)
+_____________________________________________________________________________________________________________
+
+<h2>RESULTS  </h2>
+<p>
+When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.
+</p>  
+
+![image](https://user-images.githubusercontent.com/61736185/234979344-e47b7638-8c95-403b-ade6-68a4f62d8ed2.png)
 
 
