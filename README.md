@@ -30,9 +30,6 @@ For the program to work you must have installed the libraries used to create it.
 
 ![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
 
-<p>
-The initial menu has 2 options:  
-</p>
 <h3>1. Create your own graph:  </h3>  
 
 ![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)  
@@ -48,9 +45,12 @@ When you finish typing in the edges you can click "DONE!".
 </p>
 
 
-2. Load your graph from the text file:  
+<h3>2. Load your graph from the text file:</h3>  
+<p>
 When you get to this option, you must:  
     - select a .txt file representing the graph. Below is an example of what such a file must look like:  
+</p>  
+
 ![image](https://user-images.githubusercontent.com/61736185/231255462-b4bf2999-1fda-41ef-8236-f5ccff33a8ea.png)  
 
         First line:   
