@@ -17,19 +17,20 @@ A bridge is an edge through which you cannot go to the next vertex because, ther
 
 _____________________________________________________________________________________________________________
 
-RUNNING THE PROGRAM  
+<h2>RUNNING THE PROGRAM</h2>
+<p>
 The program is launched using the fleury.py file.  
 In the folder with the fleury.py file, type the command in the terminal:  
 | python fleury.py |  
 Or you can run the file through Visual Studio Code.  
 For the program to work you must have installed the libraries used to create it.
+</p>
 
-<p style="text-align: center;">-----||------</p>
-
-START MENU  
+<h2>START MENU</h2>
+<p>
 ![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
 The initial menu has 2 options:  
-1. Create your own graph:  
+<h3>1. Create your own graph:  </h3>
 ![image](https://user-images.githubusercontent.com/61736185/231253734-290198f2-1a2b-4120-9ecd-424754ecc183.png)  
 When you get to this option, you must:  
     - enter how many vertices your graph has  
@@ -38,6 +39,7 @@ When you get to this option, you must:
     After each edge you enter, click the "Add" button to add it.  
 Important! The vertices in the graph start from 0.  
 When you finish typing in the edges you can click "DONE!".  
+</p>
 
 
 2. Load your graph from the text file:  
