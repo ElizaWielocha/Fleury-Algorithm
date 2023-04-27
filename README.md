@@ -51,60 +51,74 @@ When you get to this option, you must select a .txt file representing the graph.
 Below is an example of what such a file must look like:  
 </p>  
 
-    ->
-    8
-    0 1
-    0 4
-    1 2
-    1 0
-    2 3
-    2 5
-    3 4
-    3 6
-    4 5
-    4 7
-    5 6
-    5 1
-    6 7
-    6 2
-    7 0
-    7 3
+            ->
+            8
+            0 1
+            0 4
+            1 2
+            1 0
+            2 3
+            2 5
+            3 4
+            3 6
+            4 5
+            4 7
+            5 6
+            5 1
+            6 7
+            6 2
+            7 0
+            7 3
 
-        First line:   
-        arrow (->) means directed graph   
-        dash (-) indicates undirected graph  
+<p>
+First line:   
+arrow (->) means directed graph   
+dash (-) indicates undirected graph  
 
-        Second line:  
-        number of vertices in the graph (the graph starts with vertex number 0)  
+Second line:  
+number of vertices in the graph (the graph starts with vertex number 0)  
 
-        Other lines:  
-        Edges inscribed with the scheme: v1[space]v2  
+Other lines:  
+Edges inscribed with the scheme: v1[space]v2  
+</p>
 
+_____________________________________________________________________________________________________________
 
-
-ALGORITHM OPERATION  
+<h2>ALGORITHM OPERATION </h2>
+<p>
 You need to load into the program a graph that:  
         - is consistent  
         - undirected: either all its vertices have even degree or only 2 vertices have odd degree  
         - directed: the vertices must have the same number of incoming and outgoing edges  
 If the graph does not meet the above criteria, the program displays a message and should be closed:  
+</p>  
+
 ![image](https://user-images.githubusercontent.com/61736185/231257278-73c8656c-173d-4914-b16b-d773d1973782.png)
 
+<p>
+If you create/load a good graph, the program displays the graph and runs the fleury algorithm. 
+</p>  
 
-If you create/load a good graph, the program displays the graph and runs the fleury algorithm.  
 ![image](https://user-images.githubusercontent.com/61736185/231258452-3f8e5777-b68d-4207-934d-0117727e5970.png)
 
+<p>
 The next steps of the action are shown by pressing the [space] key.  
-
+</p><p>
 A green highlighted edge means that the edge under consideration is not a bridge and therefore can be walked over.   
 It is removed from the graph and added to the list, which will be displayed after the algorithm finishes as the result.  
-
+</p><p>
 An edge highlighted in red means that this edge is a bridge and it is not yet possible to walk over it. In later steps it is considered again to check again if it is no longer a bridge:  
+</p>  
+
 ![image](https://user-images.githubusercontent.com/61736185/231258976-80c66643-469f-40b5-bf18-c17982904b6b.png)
 
+_____________________________________________________________________________________________________________
 
-RESULTS  
-When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.  
+<h2>RESULTS  </h2>
+<p>
+When the algorithm (with our help of pressing the spacebar) passes all the edges in the graph, the result is displayed: the path or Euler cycle read from the left.
+</p>  
+
 ![image](https://user-images.githubusercontent.com/61736185/231259101-d1ce88dd-f3c8-4d0e-b352-9ff5d7b9e95d.png)
 
 
