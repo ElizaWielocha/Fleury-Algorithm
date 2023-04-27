@@ -26,9 +26,10 @@ Or you can run the file through Visual Studio Code.
 For the program to work you must have installed the libraries used to create it.
 </p>
 
-<h2>START MENU</h2> <br>
-<img src="(https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)" alt="Alt text" title="Optional title">
- 
+<h2>START MENU</h2> <br>  
+
+![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
+
 <p>
 The initial menu has 2 options:  
 </p>
