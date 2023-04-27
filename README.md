@@ -14,12 +14,16 @@ Libraries used:
     - collections  
     - keyboard  
 
+_____________________________________________________________________________________________________________
+
 RUNNING THE PROGRAM  
 The program is launched using the fleury.py file.  
 In the folder with the fleury.py file, type the command in the terminal:  
 | python fleury.py |  
 Or you can run the file through Visual Studio Code.  
 For the program to work you must have installed the libraries used to create it.
+
+<p style="text-align: center;">-----||------</p>
 
 START MENU  
 ![image](https://user-images.githubusercontent.com/61736185/231253665-668c63b4-a570-4e9a-a68c-b0c90981a912.png)  
