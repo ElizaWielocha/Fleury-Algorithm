@@ -51,7 +51,7 @@ When you get to this option, you must select a .txt file representing the graph.
 Below is an example of what such a file must look like:  
 </p>  
 
-    -><br>
+    ->
     8
     0 1
     0 4
