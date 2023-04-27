@@ -1,8 +1,9 @@
 <h1>Graphic program to perform Fleury Algorithm on undirected and directed graphs.</h1>
 
-<h4>Fleury Algorithm</h4> -> Finds an Euler path/cycle in a graph.  
+<h4>Fleury Algorithm</h4> 
+<p>-> Finds an Euler path/cycle in a graph.<br>  
 It involves removing edges from the graph that are not bridges and adding them to the list until all edges in the graph are removed.  
-A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. 
+A bridge is an edge through which you cannot go to the next vertex because, there is no way back from it. </p>
 
 Programming language: Python  
 Libraries used:  
