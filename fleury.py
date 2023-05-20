@@ -13,17 +13,17 @@ from tkinter import *
 from collections import defaultdict
 import keyboard
 
+
 # -------------------------------------------------------------------------------------------------
 
 # START MENU - Window
-window = Tk()   
 finalList = []
 filename = "" 
 nVertices = 0
 edges_list = []
 isDirected = False
 loadingGraph = False
-
+window = Tk() 
 
 lbl_line1 = Label(window, text = "_"*100, fg='grey', font=("Helvetica", 18, "bold"), bg='white')
 lbl_line1.place(relx=0.5, rely=0.2, anchor=CENTER)
