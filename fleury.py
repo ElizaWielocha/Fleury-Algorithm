@@ -13,6 +13,8 @@ from tkinter import *
 from collections import defaultdict
 import keyboard
 
+import bisect
+
 
 # -------------------------------------------------------------------------------------------------
 
@@ -141,7 +143,7 @@ window.mainloop()
 
 # Canvas creation
 plt.ion()
-fig = plt.figure()
+fig = plt.figure(figsize=(10,8))
 plot = fig.add_subplot()
 
 
@@ -192,11 +194,12 @@ class Graph:
   
     # function to add an edge to graph
     def addEdge(self,u,v, isDirected):
-        if not isDirected:          # if graph NOT directed
+        if isDirected == False:          # if graph NOT directed
             self.graph[u].append(v)
             self.graph[v].append(u)
         else:                       # else
             self.graph[u].append(v)
+
  
     # This function removes edge u-v from graph   
     def rmvEdge(self, u, v, isDirected):
@@ -204,7 +207,7 @@ class Graph:
             if key == v:
                 self.graph[u].pop(index)
                 break
-        if not isDirected:
+        if isDirected == False:
             for index, key in enumerate(self.graph[v]):
                 if key == u:
                     self.graph[v].pop(index)
@@ -250,7 +253,8 @@ class Graph:
                 count2 = self.DFSCount(u, visited)
         
             #2.c) Add the edge back to the graph
-            self.addEdge(u,v, isDirected)
+            bisect.insort(self.graph[u], v) 
+            #self.addEdge(u,v, isDirected)
 
             # 2.d) If count1 is greater, then edge (u, v) is a bridge
             if count1 > count2:
@@ -265,6 +269,7 @@ class Graph:
     def printEulerUtil(self, u, graphic_graph, pos):
         #Recur for all the vertices adjacent to this vertex
         for v in self.graph[u]:
+            print("Rozpatrywana krawedz ", u, " -> " if isDirected else " - " , v)
             #If edge u-v is not removed and it's a a valid next edge
             if self.isValidNextEdge(u, v, graphic_graph, pos, isDirected):
                 finalList.append("%d-%d" %(u,v))
@@ -281,10 +286,20 @@ class Graph:
         #Find a start vertex -  with odd degree if graph is semieulerian
         u = 0
         if not isEulerian:
-            for i in range(self.V):
-                if len(self.graph[i]) %2 != 0 :
-                    u = i
-                    break
+            for i in range(0, self.V):
+                if isDirected:
+                    edges = 0
+                    for v in range(0, self.V):
+                        if i in self.graph[v]:
+                            edges = edges+1
+                    edges = edges + len(self.graph[i])
+                    if edges %2 != 0 :
+                        u = i
+                        break
+                else:
+                    if len(self.graph[i]) %2 != 0 :
+                        u = i
+                        break
             # Print tour starting from odd vertex
             self.printEulerUtil(u, graphic_graph, pos)
         else:
@@ -307,7 +322,7 @@ if __name__ == "__main__":
 
         if isDirected:
             g_graphic = nx.MultiDiGraph()   # dimultigraph, because it can have multiple edges/petals
-        else:
+        else:  
             g_graphic = nx.MultiGraph()     # Multigraph, because it can have multiple edges/petals
             
         # read edges
@@ -343,7 +358,6 @@ if __name__ == "__main__":
 
         # starting the algorithm
         g1.printEulerTour(g_graphic, pos, isEulerian)
-        
         
         
         # result window
